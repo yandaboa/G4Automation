@@ -4,6 +4,7 @@ import { getAuth } from 'firebase/auth'
 import {firebaseConfig} from '../firebaseConfig.js'
 import App from './App.vue'
 import router from './router'
+// import Multiselect from 'vue-multiselect'
 
 // firebase.initializeApp(firebaseConfig)
 initializeApp(firebaseConfig)

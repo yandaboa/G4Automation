@@ -12,17 +12,17 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
       component: HomePage
     },
     {
       path: '/StudentForm',
-      name: 'form for students',
+      name: 'StudentForm',
       component: StudentForm
     },
     {
     path: '/TeacherLogin',
-    name: 'teacher login page',
+    name: 'TeacherLogin',
     component: TeacherLogin
   },
   {
@@ -38,14 +38,11 @@ const router = createRouter({
 ]
 })
 
-router.beforeResolve(async to => {
-  if (to.name == "TeacherLogin") {
-    console.log("executing router");
-    if(auth.currentUser != null){
-      return { name: 'TeacherDashboard'};
-    }
-    return {name: "TeacherLogin"};
+router.beforeEach((to, from) => {
+  if (to.name === 'TeacherLogin' && auth.currentUser != null) {
+    return {name: 'Dashboard' };
   }
 })
+
 
 export default router

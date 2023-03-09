@@ -84,11 +84,11 @@ const password = ref("");
 const router = useRouter();
 
 const login = () => {
-    // if(auth.currentUser != null){
-    //     alert("already logged in!");
-    //     router.push("/TeacherDashboard");
-    //     return;
-    // }
+    if(auth.currentUser != null){
+        alert("already logged in!");
+        router.push("/TeacherDashboard");
+        return;
+    }
     signInWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
         const user = userCredential.user;

@@ -8,8 +8,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@syncfusion/ej2-vue-dropdowns": "^20.4.53",
     "firebase": "^9.17.1",
     "vue": "^3.2.47",
+    "vue-multiselect": "^2.1.7",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {

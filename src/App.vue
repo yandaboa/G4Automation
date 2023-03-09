@@ -1,5 +1,9 @@
 <script setup>
+// import Vue from 'vue';
 import { RouterLink, RouterView } from 'vue-router'
+// import {MultiSelectPlugin} from '@syncfusion/ej2-vue-dropdowns';
+// import { VueElement } from 'vue';
+// Vue.use(MultiSelectPlugin);
 // import HelloWorld from './components/HelloWorld.vue'
 </script>
 
