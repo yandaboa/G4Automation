@@ -1,5 +1,3 @@
-<script setup>
-</script>
 
 <template>
     <div id = "container">
@@ -23,6 +21,9 @@
                     Login
                     </button>   
                 </form> 
+                <router-link to="/Register" class="newAccountButton">
+                    <p >Create a new account</p>
+                </router-link>
             </div>
         </div>
     </div>
@@ -33,13 +34,19 @@
     font-family: Inter;
     font-size: 1vw;
     margin-left: 28vw;
-    margin-bottom: 5vh;
+    margin-bottom: 3vh;
     border-radius: 0.3vw;
+}
+.newAccountButton {
+    flex: auto;
+    justify-self: center;
+    text-align: center;
 }
 button {
     margin-left: 33vw;
     font-size: 1vw;
     border-radius: 0.3vw;
+    margin-bottom: 2vh;
 }
 #formTitle {
     font-family: Inter;
@@ -61,5 +68,38 @@ button {
     height: 100vh;
     margin-left: 15vw;
     background-color: rgb(196, 211, 211);
+    /* flex: auto; */
+    /* justify-content: center; */
 }
 </style>
+
+<script setup>
+import { ref } from "vue";
+import { auth } from "../main.js";
+import { useRouter } from "vue-router";
+import { signInWithEmailAndPassword } from "@firebase/auth";
+// import { loginBackend } from "../backend";
+const email = ref("");
+const password = ref("");
+const router = useRouter();
+
+const login = () => {
+    // if(auth.currentUser != null){
+    //     alert("already logged in!");
+    //     router.push("/TeacherDashboard");
+    //     return;
+    // }
+    signInWithEmailAndPassword(auth, email.value, password.value)
+    .then((userCredential) => {
+        const user = userCredential.user;
+        router.push("/TeacherDashboard");
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+    });
+}
+
+</script>
