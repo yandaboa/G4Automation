@@ -1,7 +1,10 @@
 <script>
 import { auth } from '../main';
-import { ref } from 'vue';
 import MultiSelect from '@vueform/multiselect';
+import {db} from '../main'
+import { ref, set } from "firebase/database";
+import router from '../router';
+
 
 export default {
     components: {MultiSelect},
@@ -23,13 +26,20 @@ export default {
             return true;
         },
         submitForm(){
-            console.log(this.name);
-            console.log(this.selectedGrade);
-            console.log(this.hasDoneG4);
-            this.scienceClasses.forEach(element => {
-                console.log(element);
+            console.log("form submitted");
+            set(ref(db, 'students/' + this.name ), {
+                grade: this.selectedGrade,
+                hasExperience: this.hasDoneG4,
+                classes: this.scienceClasses,
+                requestedStudent: this.studentRequest
             });
-            console.log(this.studentRequest);
+            this.name = "";
+            this.selectedGrade = "";
+            this.hasDoneG4 = "";
+            this.scienceClasses = null;
+            this.studentRequest = "";
+            router.push('/');
+            alert("thank you for submitting a response!");
         }
     }
 }
@@ -75,7 +85,7 @@ export default {
                     v-model="studentRequest"
                     />
                     <br /> <br /> <br />
-                    <button type="submit" :disabled="false">
+                    <button type="submit" :disabled="formFilledOut()">
                         Submit
                     </button>
                     <p id="formInstructions" class="regular-font">{{!formFilledOut() ? "" : "Please fill out form completely"}}</p>
