@@ -8,13 +8,18 @@
                 <button type="button" id="getGroups" @click="getGroups">
                     Get Groups
                 </button>
-                <button type="button" id="editGroups" @click="deleteStudents">
+                <button type="button" id="editGroups" @click="toggleDeleteAllConfrim">
                     Delete Students
                 </button>
                 <button type="button" id="signOut" @click="toggleSignoutDialogue">
                     Sign Out
                 </button>
-                <div v-if="this.showSignoutConfirm" id="confirmDialogue">
+                <div v-if="this.showDeleteAllConfirm" id="deleteAllConfirmDialogue">
+                    <p>Are you sure you want to delete all student data?</p>
+                    <button @click="deleteStudents" class="inDialogue">Yes</button>
+                    <button @click="toggleDeleteAllConfrim" class="inDialogue">No</button>
+                </div>
+                <div v-if="this.showSignoutConfirm" id="signoutConfirmDialogue">
                     <p>Are you sure you want to signout?</p>
                     <button @click="signOut" class="inDialogue">Yes</button>
                     <button @click="toggleSignoutDialogue" class="inDialogue">No</button>
@@ -26,11 +31,23 @@
 </template>
 
 <style scoped>
+    #deleteAllConfirmDialogue {
+        /* margin-top: 10vh;
+        width: 25vw;
+        text-align: right; */
+    }
+    #signoutConfirmDialogue {
+        text-align: right;
+        margin-right: 5vw;
+    }
     button {
         background-color: rgb(114, 114, 180);
     }
+    .inDialogue {
+        margin-right: 5vw;
+    }
     #getGroups {
-        margin-top: 32.5vh;
+        margin-top: 12.5vh;
         height: 5vh;
         width: 10vw;
         margin-right: 10vw;
@@ -40,11 +57,11 @@
         height: 80vh;
     }
     #title {
-        margin-top: 0vh;
-        margin-left: 10vw;
+        margin-top: 25vh;
+        /* margin-left: 10vw; */
     }
     #editGroups {
-        margin-top: 32.5vh;
+        margin-top: 12.5vh;
         height: 5vh;
         width: 10vw;
         margin-right: 10vw;
@@ -56,7 +73,7 @@
         
     }
     #signOut {
-        margin-top: 32.5vh;
+        margin-top: 12.5vh;
         height: 5vh;
         width: 10vw;
     }
@@ -74,19 +91,23 @@
 // import { db } from '../main';
 
 import { signOut } from '@firebase/auth';
-import { auth } from '../main';
+import { ref, set } from '@firebase/database';
+import { auth, db } from '../main';
+import {makeGroups} from '../groupMaker';
 import router from '../router/index';
 
 export default {
     data () {
         return {
-            showSignoutConfirm: false
+            showSignoutConfirm: false,
+            showDeleteAllConfirm: false
         }
     },
     methods: {
         getGroups() {
+            makeGroups();
             console.log("getting all groups");
-            alert("works");
+            // alert("works");
         },
         signOut() {
             signOut(auth);
@@ -94,10 +115,16 @@ export default {
             router.push('/');
         },
         deleteStudents () {
+            set(ref(db, 'students/'), {});
             console.log("deleted all the students oh no");
         },
         toggleSignoutDialogue () {
             this.showSignoutConfirm = !this.showSignoutConfirm;
+            this.showDeleteAllConfirm = false;
+        },
+        toggleDeleteAllConfrim () {
+            this.showDeleteAllConfirm = !this.showDeleteAllConfirm;
+            this.showSignoutConfirm = false;
         }
     }
 }
