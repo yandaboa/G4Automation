@@ -1,5 +1,5 @@
 <script>
-import { auth } from '../main';
+// import { auth } from '../main';
 import MultiSelect from '@vueform/multiselect';
 import {db} from '../main'
 import { ref, set } from "firebase/database";

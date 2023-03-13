@@ -17,27 +17,25 @@
     </div>
 </template>
 
-<script setup>
-import { ref } from 'vue';
-import { getAuth, createUserWithEmailAndPassword, signOut } from '@firebase/auth';
-import { useRouter } from 'vue-router';
+<script>
+import { createUserWithEmailAndPassword, signOut } from '@firebase/auth';
 import { auth } from '../main';
-const password = ref('');
-const email = ref('');
-const router = useRouter();
+import router from '../router';
 
-const register = () => {
-    createUserWithEmailAndPassword(auth, email.value, password.value)
-        .then((data) => {
-            console.log("Successfully registered!");
-            signOut(auth);
-            router.push("/TeacherLogin");
-        })
-        .catch((error) => {
-            console.log(error.code);
-            alert(error.message);
-        })
+export default {
+    data () {
+        return {
+            password: '',
+            email: ''
+        }
+    },
+    methods: {
+        register() {
+            createUserWithEmailAndPassword(auth, this.email, this.password);
+            console.log(auth.currentUser);
+        }
+    }
 
-};
+}
 
 </script>

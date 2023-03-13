@@ -1,5 +1,13 @@
-// import { ref } from "vue";
-// import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-// import { useRouter } from "vue-router";
+import { auth } from "./main";
+import { db } from "./main";
+import router from "./router";
 
-// const auth = getAuth();
+auth.onAuthStateChanged(
+    () => {
+        if(auth.currentUser == null){
+            router.push('/');
+        } else {
+            router.push('/TeacherDashboard');
+        }
+    }
+)

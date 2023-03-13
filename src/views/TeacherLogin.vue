@@ -75,9 +75,10 @@ button {
 
 <script setup>
 import { ref } from "vue";
-import { auth } from "../main.js";
+// import { auth } from "../main.js";
 import { useRouter } from "vue-router";
 import { signInWithEmailAndPassword } from "@firebase/auth";
+import {auth} from '../main';
 // import { loginBackend } from "../backend";
 const email = ref("");
 const password = ref("");

@@ -6,6 +6,7 @@ import TeacherLogin from '../views/TeacherLogin.vue'
 import TeacherDashboard from '../views/TeacherDashboard.vue'
 import Register from '../views/Register.vue'
 import { auth } from '../main'
+// import { auth } from '../main'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,10 +40,14 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
+  if((to.name !== 'TeacherLogin' && to.name !== 'StudentForm') && auth.currentUser === null){
+    if(to.name != 'Home'){
+      return {name: 'Home'};
+    }
+  }
   if (to.name === 'TeacherLogin' && auth.currentUser != null) {
     return {name: 'Dashboard' };
   }
 })
-
 
 export default router
