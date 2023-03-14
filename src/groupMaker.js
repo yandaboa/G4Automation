@@ -34,8 +34,9 @@ function sortStudents(){
     // console.log(Object.keys(allStudents));
     for(var key in allStudents){
         seperated.push(false);
+        console.log(key);
         for(let i = 0; i < allStudents[key]["classes"].length; i++){
-            // console.log(allStudents[key]["classes"][i]);
+            console.log(allStudents[key]["classes"][i]);
             switch(allStudents[key]["classes"][i]){
                 case "IB Bio":
                     bio++;

@@ -81,7 +81,7 @@ export default {
                     </div>
                     <input class="inputFields" id="request"
                     type="text" 
-                    placeholder="Student name"
+                    placeholder="Partner request..."
                     v-model="studentRequest"
                     />
                     <br /> <br /> <br />
@@ -118,7 +118,7 @@ export default {
     height: 25px;
 }
 form {
-    margin-top: 20vh;
+    margin-top: 10vh;
 }
 select {
     font-family: Inter;

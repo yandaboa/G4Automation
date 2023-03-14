@@ -29,7 +29,7 @@
     object-fit: cover;
     display: inline-block;
     background-image: url(src/assets/19201080ssss.jpeg);
-    opacity: 50%;
+    opacity: 75%;
     text-align: center;
 }
 
@@ -39,7 +39,7 @@
     object-fit: cover;
     display: inline-block;
     background-image: url(src/assets/GrandCanyonNationalPark-2020-GettyImages-858637934.jpg.webp);
-    opacity: 50%;
+    opacity: 75%;
     text-align: center;
     /* vertical-align: middle; */
 }
