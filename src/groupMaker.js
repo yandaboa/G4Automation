@@ -2,7 +2,8 @@ import { db, auth } from "./main"
 import { getDatabase, ref, child, get } from "firebase/database"
 import router from "./router"
 
-const allStudents = [], allStudentNames = [];
+//array of raw student data, straight from Firebase Realtime Database
+const allStudents = [];
 
 export function makeGroups() {
     if(auth.currentUser == null){

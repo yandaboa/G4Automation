@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="container">
         <form @submit.prevent="register">
         <h2>Register</h2>
         <input
@@ -37,5 +37,13 @@ export default {
     }
 
 }
-
 </script>
+
+<style>
+#container {
+    background-color: rgb(129, 186, 128);
+    width: 100vw;
+    height: 100vh;
+}
+</style>
+
