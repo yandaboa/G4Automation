@@ -46,7 +46,7 @@ router.beforeEach((to, from) => { //runs every time a new page is navigated to
     }
   }
   //if the user tries to go to TeacherLogin while already logged in, it redirects to the Dashboard
-  if ((to.name === 'TeacherLogin' && to.name === 'Register') && auth.currentUser != null) {
+  if ((to.name === 'TeacherLogin' || to.name === 'Register') && auth.currentUser != null) {
     return {name: 'Dashboard' };
   }
 })
