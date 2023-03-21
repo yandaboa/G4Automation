@@ -96,6 +96,7 @@ const login = () => {
         router.push("/TeacherDashboard");
     })
     .catch((error) => {
+        alert("Unable to login, please make sure you have already registered a teacher account and you are filling out the fields correctly.");
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode);

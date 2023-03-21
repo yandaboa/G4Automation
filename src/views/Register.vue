@@ -33,8 +33,18 @@ export default {
     },
     methods: {
         register() {
-            createUserWithEmailAndPassword(auth, this.email, this.password);
-            console.log(auth.currentUser);
+            if(this.email != "vonbargeng@issaquah.wednet.edu"){
+                alert("only teachers are allowed to register an account.");
+            } else {
+                if(this.password != "vonbargen"){
+                    alert("password incorrect for the teacher registration");
+                } else {
+                    createUserWithEmailAndPassword(auth, this.email, this.password);
+                    console.log(auth.currentUser);
+                    alert("You are signed in!");
+                    router.push('/TeacherDashboard');
+                }
+            }
         }
     }
 
